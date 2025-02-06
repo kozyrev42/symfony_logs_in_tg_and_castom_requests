@@ -14,3 +14,5 @@
 - создан тестовый роут в файле: config/routes.yaml
 
 - создан тестовый обработчик в файле: src/Controller/TestApiController.php
+
+2. Создана дефолтная консольная команда ExampleCommand.
