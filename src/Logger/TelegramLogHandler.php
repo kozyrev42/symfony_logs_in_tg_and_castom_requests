@@ -38,7 +38,6 @@ class TelegramLogHandler extends AbstractProcessingHandler
             'json' => [
                 'chat_id' => $this->chatId,
                 'text' => $message,
-                'parse_mode' => 'Markdown',
             ],
         ]);
     }

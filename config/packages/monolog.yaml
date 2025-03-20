@@ -25,7 +25,7 @@ when@dev:
             telegram:
                 type: service
                 id: App\Logger\TelegramLogHandler
-                level: error  # Будут отправляться ошибки и выше (error, critical, alert, emergency)
+                level: alert  # Будут отправляться ошибки и выше (error, critical, alert, emergency)
 
 when@test:
     monolog:
