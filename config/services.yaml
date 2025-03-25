@@ -19,3 +19,18 @@ services:
         arguments:
             $botToken: '%env(TELEGRAM_BOT_TOKEN)%'
             $chatId: '%env(TELEGRAM_CHAT_ID)%'
+
+    # Symfony будет использовать этот сервис для подстановки аргументов в контроллеры
+    # Тег 'controller.argument_value_resolver' говорит Symfony:
+    # «Этот класс будет автоматически обрабатывать аргументы в контроллерах».
+    App\Validation\RequestResolver\ValidatedRequestResolver:
+        tags: ['controller.argument_value_resolver'] # <<< это встроенный механизм Symfony
+
+    # Symfony будет использовать этот сервис для обработки исключений
+    App\Validation\Exception\ValidationExceptionHandler:
+        tags:
+            # Регистрируем этот слушатель как обработчик исключений в Symfony
+            # Он будет перехватывать все исключения, выброшенные в приложении, и реагировать на событие kernel.exception
+            # Этот обработчик будет вызван каждый раз, когда происходит исключение в процессе обработки запроса.
+            # В частности, он будет перехватывать ValidationException и форматировать ответ с ошибками валидации.
+            - { name: kernel.event_listener, event: kernel.exception }
